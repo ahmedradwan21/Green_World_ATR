@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+<body>
+    <div class="body">
+        <header>
+            <div class="logo">
+                <div class="img_box">
+                    <img src="{% static 'images/imdg_3.jpg' %}" alt="Green World">
+                </div>
+                <a href="{% url 'index' %}"> Green World</a>
+            </div>
+                
+            <ul>
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'favorites' %}">My Plants</a></li>
+                <li><a href="{% url 'process_question' %}">Plant Queries</a></li> 
+                <li><a href="{% url 'register' %}">SignUP</a></li>
+                <li><a href="{% url 'login' %}">Login</a></li>
+                <li>
+                    <form action="{% url 'logout' %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="logout-button">Logout</button>
+                    </form>
+                </li>
+            </ul>
+        </header>
+
+        <div class="container" id="login">
+            <h1>Login</h1>
+            <form method="POST" action="{% url 'login' %}">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ next }}">
+                <div class="input-field">
+                    <input type="text" name="username" id="id_username" maxlength="254" required placeholder="Username">
+                    {% if form.username.errors %}
+                        <div class="error-message">{{ form.username.errors }}</div>
+                    {% endif %}
+                </div>
+                <div class="input-field">
+                    <input type="password" name="password" id="id_password" required placeholder="Password">
+                    {% if form.password.errors %}
+                        <div class="error-message">{{ form.password.errors }}</div>
+                    {% endif %}
+                </div>
+                <div class="show-password">
+                    <input type="checkbox" id="show-password-checkbox"> Show Password
+                </div>    
+                <button type="submit" class="submit-btn">Login</button>
+            </form>
+            <a href="{% url 'register' %}" class="signup-link">Don't have an account? Sign Up</a>
+        </div>
+    </div>
+    <script src="{% static 'js/login.js' %}"></script>
+</body>
+</html>
+
+
+
+

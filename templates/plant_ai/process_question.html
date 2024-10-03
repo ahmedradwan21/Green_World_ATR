@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Process Question</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="{% static 'css/process_question.css' %}">
+</head>
+<body class="body">
+    <header>
+        <div class="logo">
+            <div class="img_box">
+                <img src="{% static 'images/imdg_3.jpg' %}" alt="Green World">
+            </div>
+            <a href="{% url 'index' %}">Green World</a>
+        </div>
+            
+        <ul>
+            <li><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="{% url 'favorites' %}">My Plants</a></li>
+            <li><a href="{% url 'process_question' %}">Plant Queries</a></li> 
+            <li><a href="{% url 'register' %}">SignUP</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li>
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="logout-button">Logout</button>
+                </form>
+            </li>
+        </ul>
+    </header>
+
+    <div class="chat-container">
+        <div id="chat-messages"></div>
+        <form id="questionForm">
+            <textarea id="questionInput" name="question" placeholder="Enter your question..."></textarea><br><br>
+            {% csrf_token %}
+            <input type="submit" value="Send">
+        </form>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#questionForm').submit(function(e) {
+                e.preventDefault();
+                var userQuestion = $('#questionInput').val().trim();
+                if (userQuestion !== '') {
+                    $('#chat-messages').append('<div class="message user-message">' + userQuestion + '</div>');
+                    $('#questionInput').val('');
+                    $.ajax({
+                        type: 'POST',
+                        url: '{% url "process_question" %}',
+                        data: {
+                            'question': userQuestion,
+                            'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+                        },
+                        success: function(response) {
+                            var answer = response.answer;
+                            $('#chat-messages').append('<div class="message bot-message">' + answer + '</div>');
+                            $('#chat-messages').scrollTop($('#chat-messages')[0].scrollHeight);
+                        },
+                        error: function(xhr, errmsg, err) {
+                            console.log(xhr.status + ": " + xhr.responseText);
+                            $('#chat-messages').append('<div class="message error-message">An error occurred. Please try again.</div>');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+

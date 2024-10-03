@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Plants</title>
+    <link rel="stylesheet" href="{% static 'css/favorties.css' %}">
+</head>
+<body class="body">
+    
+    <header>
+        <div class="logo">
+            <div class="img_box">
+                <img src="{% static 'images/imdg_3.jpg' %}" alt="Green World">
+            </div>
+            <a href="{% url 'index' %}"> Green World</a>
+        </div>
+            
+        <ul>
+            <li><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="{% url 'favorites' %}">My Plants</a></li>
+            <li><a href="{% url 'process_question' %}">Plant Queries</a></li> 
+            <li><a href="{% url 'register' %}">SignUP</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li>
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="logout-button">Logout</button>
+                </form>
+            </li>
+        </ul>
+    </header>
+    
+    <div class="container">
+        <h1>My Plants</h1>
+        {% if request.user.is_authenticated %}
+            {% if favorites %}
+                <div>
+                    {% for favorite in favorites %}
+                        <div class="plant-item">
+                            <div class="plant-info">
+                                <a href="{% url 'plant_detail' favorite.plant.id %}">
+                                    <h2>
+                                        <img src="{{ favorite.plant.image.url }}" alt="{{ favorite.plant.name }}" class="plant-image">
+                                        {{ favorite.plant.name }}
+                                    </h2>
+                                        
+                                </a>
+                            </div>
+                            <a href="{% url 'remove_from_favorites' favorite.plant.id %}" class="remove-link">Remove</a>
+                            <div style="clear:both;"></div> 
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% else %}
+            <p>You need to <a href="{% url 'login' %}">log in</a> or <a href="{% url 'register' %}">create an account</a> 
+                to view your favorite plants.</p>
+        {% endif %}
+    </div>
+       
+</body>
+</html>
+
+
+

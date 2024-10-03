@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Plant</title>
+    <link rel="stylesheet" href="{% static 'css/category_plants.css' %}">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <div class="img_box">
+                <img src="{% static 'images/imdg_3.jpg' %}" alt="Green World">
+            </div>
+            <a href="{% url 'index' %}"> Green World</a>
+        </div>
+            
+        <ul>
+            <li><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="{% url 'favorites' %}">My Plants</a></li>
+            <li><a href="{% url 'process_question' %}">Plant Queries</a></li> 
+            <li><a href="{% url 'register' %}">SignUP</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li>
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="logout-button">Logout</button>
+                </form>
+            </li>
+        </ul>
+    </header>
+    <div class="container" id = "plant">
+        <h1>{{ category.name }}</h1>
+        {% for plant in plants %}
+            <a href="{% url 'plant_detail' plant.id %}">
+                <h2>
+                    <img src="{{ plant.image.url }}" alt="{{ plant.name }}"
+                    style="width: 50px; height: 50px;border-radius: 50%;object-fit: cover; ">
+                    {{ plant.name }}
+                </h2>
+            </a>
+        {% endfor %}
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

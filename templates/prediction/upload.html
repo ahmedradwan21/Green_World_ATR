@@ -1,0 +1,108 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload Image Plant</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #5a67d8;
+            margin-bottom: 20px;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        input[type="file"] {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 2px dashed #5a67d8;
+            border-radius: 4px;
+            background-color: #f4f4f9;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #5a67d8;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #434190;
+        }
+
+        h2 {
+            margin-top: 30px;
+        }
+
+        pre {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body class="body">
+    <header>
+        <div class="logo">
+            <div class="img_box">
+                {% comment %} <img src="{% static 'images/imdg_3.jpg' %}" alt="Green World"> {% endcomment %}
+            </div>
+            <a href="{% url 'index' %}"> Green World</a>
+        </div>
+            
+        <ul>
+            <li><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="{% url 'favorites' %}">My Plants</a></li>
+            <li><a href="{% url 'process_question' %}">Plant Queries</a></li> 
+            <li><a href="{% url 'register' %}">SignUP</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li>
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="logout-button">Logout</button>
+                </form>
+            </li>
+            
+
+        </ul>
+    </header>
+
+    <h1>Upload an Image for Prediction</h1>
+    <form id="uploadForm" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" id="imageFile" name="file" accept="image/*" required>
+        <button type="submit">Upload</button>
+    </form>
+    <h2>Prediction Result:</h2>
+    <pre id="result">{{ result }}</pre>
+</body>
+</html>

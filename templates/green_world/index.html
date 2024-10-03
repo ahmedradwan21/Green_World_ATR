@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Green World</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+</head>
+<body>
+    <div class="body">
+        <div class="container">
+            <header>
+                <div class="logo">
+                    <div class="img_box">
+                        <img src="{% static 'images/imdg_3.jpg' %}" alt="Green World">
+                    </div>
+                    <a href="{% url 'index' %}"> Green World</a>
+                </div>
+                    
+                <ul>
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li><a href="{% url 'favorites' %}">My Plants</a></li>
+                    <li><a href="{% url 'process_question' %}">Plant Queries</a></li> 
+                    <li><a href="{% url 'register' %}">SignUP</a></li>
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                    <li>
+                        <form action="{% url 'logout' %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="logout-button">Logout</button>
+                        </form>
+                    </li>
+                    
+        
+                </ul>
+            </header>
+            <div class="content">
+                <p>plants make a positive impact on your environment</p>
+                <form method="get" action="{% url 'search' %}">
+                    <ion-icon name="search-circle-outline"></ion-icon>
+                    <input type="search" name="query" placeholder="Search for plants..." value="{{ query }}">
+                    <input type="submit"  value="search">
+                </form>
+            </div>
+            
+        </div>
+
+        <section id="about" class="about">
+
+            
+            <h1 class="heading">About us</h1>
+    
+            <div class="row">
+                
+                <div class="content">
+                    <h2>The Importance of Plants in Our Lives</h2>
+                    <p>Plants play a crucial role in sustaining life on Earth. They are a primary source of the oxygen we breathe 
+                        and help maintain environmental balance by absorbing carbon dioxide. Additionally,plants provide food, 
+                        shelter, and medicine for humans and animals alike. They are an essential part of ecosystems, aiding in 
+                        soil protection and water conservation. By cultivating and caring for plants, we not only enhance our 
+                        quality of life but also contribute to preserving our planet for future generations.
+                    </p>
+                    
+                </div>
+    
+                
+                <div class="images">
+                    <img src="{% static '/images/about.png' %}" alt="">
+                </div>
+            </div>
+        </section>
+        <div class="plants">
+            <h1>Common Plants</h1>
+            <div class="category-image">
+                {% for category in categories %}
+                    <a href="{% url 'plants_by_category' category_id=category.id %}">
+                        
+                        <div class="category-item">
+                            <h2>
+                                <img src="{{ category.image.url }}" alt="{{ category.name }}" class="category-image">
+                                {{ category.name }}
+                            </h2>
+                        
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2024 Green World</p>
+            <ul>
+                <a href="{% url 'index' %}">Home</a>
+                <a href="{% url 'favorites' %}">My Plants</a>
+                <a href="{% url 'process_question' %}">Plant Queries</a>
+                <a href="{% url 'register' %}">SignUP</a>
+                <a href="{% url 'login' %}">Login</a>
+                <a href="{% url 'logout' %}">Logout</a>
+            </ul>
+        </footer>
+    </div>
+</body>
+</html>

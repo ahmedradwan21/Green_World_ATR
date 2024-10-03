@@ -1,0 +1,144 @@
+body {
+    background: url("/static/images/img_2.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    border-radius: 20px;
+    align-items: center;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.8); 
+    backdrop-filter: blur(10px); 
+}
+
+header .logo {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+header .logo .img_box {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+header .logo .img_box img {
+    width: 100%;
+}
+
+header .logo a {
+    font-size: 30px;
+    color: rgb(24, 121, 5);
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+header ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-evenly;
+    width: 60%;
+}
+
+header ul li a {
+    font-size: larger;
+    color: rgb(4, 128, 4);
+    text-decoration: none;
+}
+
+header ul li a:hover {
+    color: #17da47;
+    border-bottom: 2px solid rgb(30, 197, 52);
+}
+
+.logout-button {
+    background-color: #53c25c;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 100px;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.logout-button:hover {
+    background-color: #077227;
+}
+
+
+.body {
+    font-family: Arial, sans-serif;
+    height: 100%;
+    width: 100%;
+}
+
+.chat-container {
+    width: 80%;
+    margin: 20px auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+}
+
+#chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+
+.message {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    clear: both;
+    max-width: 60%;
+}
+
+.user-message {
+    background-color: #e2f7cb;
+    float: right;
+    text-align: right;
+}
+
+.bot-message {
+    background-color: #f0f0f0;
+    float: left;
+    text-align: left;
+}
+
+#questionInput {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    float: right;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}

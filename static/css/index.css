@@ -1,0 +1,358 @@
+
+/* تنسيق الخلفية */
+.body {
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    text-decoration: none;
+}
+
+body {
+    
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.body h1{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: #094d20;
+}
+.container {
+    background-image: linear-gradient(to right, rgba(5, 83, 5, 0.345) 30%, #cccc7854), url('/static/images/imdg.jpg');
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.container:hover {
+    background-image: linear-gradient(to right, rgba(5, 83, 5, 0.345) 30%, transparent), url('/static/images/imdg.jpg');
+}
+
+.container header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.body .container header .logo .img_box {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.body .container header .logo .img_box  img {
+    width: 100%;
+}
+
+.body .container header .logo {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.body .container header .logo a {
+    font-size: 30px;
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.container header ul {
+    list-style: none;
+    display: flex;
+    width: 60%;
+    justify-content: space-evenly;
+}
+.container header ul li a{
+    font-size: larger;
+    color: white;
+    text-decoration: none;
+}
+.container header ul li a:hover{
+    color: #17da47;
+    border-bottom: 2px solid rgb(30, 197, 52);
+}
+
+.logout-button {
+    background-color: #53c25c; 
+    color: white; 
+    padding: 10px 20px; 
+    border: none; 
+    cursor: pointer; 
+    border-radius: 100px; 
+    text-decoration: none; 
+    font-size: 16px; 
+}
+
+.logout-button:hover {
+    background-color: #077227; 
+}
+
+.body .container .content {
+    color: white;
+    width: 50%;
+    margin-top: 50px;
+    padding: 30px;
+}
+
+.body .container .content p {
+    font-weight: bold;
+    font-size: 40px;
+    letter-spacing: 2px;
+    width: 300px;
+    padding: 20px 0;
+}
+
+.body .container .content form {
+    background-color: white;
+    border-radius: 100px;
+    padding: 10px;
+    width: 45%;
+    height: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.body .container .content form input[type="search"] {
+    flex: 1;
+    min-width: 0;
+    background-color: white;
+    border: none;
+    outline: none;
+    padding: 0px 5px;
+}
+
+.content form input[type="submit"] {
+    background-color: green;
+    color: white;
+    border-radius: 100px;
+    padding: 5px;
+    font-weight: 400;
+    text-align: center;
+    border: none;
+}
+
+.content form input[type="submit"]:hover {
+    background-color: darkgreen;
+    cursor: pointer;
+}
+
+/* about section start  */
+.body .about {
+    min-height: 50vh;
+    width: 100vw;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.body .about .row {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 4rem;
+}
+
+.body .about .row .content {
+    text-align: left;
+    padding: 4rem;
+}
+.body .about .row .content h1 {
+    font-size: 3rem;
+    color: green;
+}
+
+.body .about .row .content h2 {
+    font-size: 3rem;
+    color: green;
+}
+
+.body .about .row .content p {
+    font-size: 1.5rem;
+    color: black;
+    padding: 1rem 0;
+}
+
+/* about images  */
+.body .about .row .images img {
+    width: 40vw;
+    border-radius: 2rem;
+}
+
+/* about section sercle  */
+.body .about::after,
+.about::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    opacity: .2;
+    border-radius: 70%;
+}
+
+/* cercle top left  */
+.body .about::after {
+    height: 50rem;
+    width: 50rem;
+    background-color: greenyellow;
+    top: -10rem;
+    right: -10rem;
+}
+
+/* cercle buttom left  */
+.body .about::before {
+    height: 50rem;
+    width: 50rem;
+    background-color: greenyellow;
+    bottom: -10rem;
+    left: -10rem;
+}
+
+/* about section end  */
+
+/* تنسيق الصور */
+
+.plants::after, .plants::before{
+    content: '';
+    position: absolute;
+    z-index: -1;
+    opacity: .2;
+    border-radius: 70%;
+}
+.plants::after{
+    height: 50rem;
+    width: 50rem;
+    background-color: greenyellow;
+    top: -10rem;
+    right: -10rem;
+
+}
+.plants::before{
+    height: 50rem;
+    width: 50rem;
+    background-color: greenyellow;
+    bottom: -10rem;
+    left: -10rem;
+}
+
+/* تنسيق الصور */
+.plants {
+    padding-bottom: 50px; 
+    position: relative;
+    overflow: hidden;
+}
+.category-image {
+    text-align: left;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 20px; 
+    padding: 0px;
+}    
+.category-image a {
+    text-decoration: none;
+    text-align: left;
+}
+.category-item {
+    height: 95%;
+    width: 50%;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    border: 2px solid #ccc; 
+    background: rgb(253, 255, 254);
+    border-radius: 0%;
+    border-color: rgb(8, 131, 63);
+    padding: 4px; 
+    margin-left: 30px;
+    margin-bottom: auto;
+    transition: transform 0.3s ease; 
+}
+
+.category-item:hover {
+    transform: scale(1.05); 
+    text-decoration: none;
+    
+}
+
+.category-item h2 img {
+    height: auto; 
+    max-height: 200px; 
+    width: 100%;
+    text-decoration: none;
+    text-align: left;
+    background-image: #094d20; 
+    border-radius: 0%;
+    object-fit: cover;
+    margin-bottom: 0px;
+    padding-left: 0%;
+    padding-right: 0%;
+    padding-top: 0%;
+    padding-bottom: 0%; 
+}
+
+.category-item h2 {
+    text-decoration: none;
+    font-size: 20px; 
+    color: #094d20;
+    margin-bottom: 1px;
+    margin-top: 0%;
+    padding-left: 0%;
+    padding-right: 0%;
+    padding-top: 0%;
+    padding-bottom: 0%;  
+}
+
+footer {
+    height: 50px;
+    width: 100%;
+    background-color: #020507; 
+    color: #fff; 
+    padding: 20px 0;
+    margin-top: 10px; 
+    margin-bottom: 0%;
+    text-align: center;
+    
+}    
+
+footer p {
+    font-size: larger;
+    font-weight: bolder;
+    padding-left: 10px;
+    margin: 0; /* إزالة الهوامش */
+}
+footer ul{
+    padding-left: 0px;
+    list-style: none;
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;    
+
+}
+footer ul a{
+    font-size: larger;
+    border-bottom: 2px solid transparent;
+    color: white;
+    text-decoration: none;
+}
+footer ul a:hover {
+    border-bottom: 2px solid white;
+}
+
+
+
+
+
+
+
+
+

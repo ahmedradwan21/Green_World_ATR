@@ -1,0 +1,155 @@
+body {
+    background: url("/static/images/img_1.jpeg");
+    
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    height: 100vh;
+    width: 100%;
+}
+.body {
+    height: 100%;
+    width: 100%;
+    background: rgba(39, 39, 39, 0.4);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+header .logo .img_box {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+header .logo .img_box  img {
+    width: 100%;
+}
+
+header .logo {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+header .logo a {
+    font-size: 30px;
+    color: rgb(238, 240, 238);
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+header ul {
+    list-style: none;
+    display: flex;
+    width: 60%;
+    justify-content: space-evenly;
+}
+header ul li a{
+    font-size: larger;
+    color: rgb(206, 223, 206);
+    text-decoration: none;
+}
+header ul li a:hover{
+    color: #dbe6de;
+    border-bottom: 2px solid rgb(30, 197, 52);
+}
+
+.logout-button {
+    background-color: #53c25c;
+    color: white; 
+    padding: 10px 20px; 
+    border: none; 
+    cursor: pointer; 
+    border-radius: 100px; 
+    text-decoration: none; 
+    font-size: 16px; 
+    
+}
+
+.logout-button:hover {
+    background-color: #077227; 
+}    
+
+
+.container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 50vh;
+    padding: 20px; 
+}
+
+.signup-link {
+    color: white;
+    font-weight: 500;
+    text-decoration: none;
+    margin-bottom: 10px; 
+}
+.signup-link:hover{
+    color: #7fce25;
+}
+#login h1 {
+    color: white;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.input-field {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.input-field input[type="text"],
+.input-field input[type="password"] {
+    background: rgba(255, 255, 255, 0.2);
+    color: #010f03;
+    height: 40px; 
+    width: 100%;
+    padding: 0 50px;
+    border: none;
+    border-radius: 100px;
+    outline: none;
+    transition: background 0.3s ease;
+    
+}
+
+
+.submit-btn {
+    background: rgba(181, 233, 122, 0.897);
+    color: black;
+    font-size: 18px; 
+    font-weight: 600; 
+    height: 45px; 
+    width: 100%;
+    border: none;
+    border-radius: 30px;
+    outline: none;
+    cursor: pointer;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+    margin-left: 50px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.submit-btn:hover {
+    background: rgba(20, 124, 6, 0.5);
+    box-shadow: 1px 5px 7px 1px rgba(0, 0, 0, 0.2);
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}

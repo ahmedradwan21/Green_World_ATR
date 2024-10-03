@@ -1,0 +1,129 @@
+body {
+    background: url("/static/images/img_3.jpeg");
+    background-size: cover ;
+    background-repeat: no-repeat;
+    background-attachment: fixed;   
+}
+
+
+header {
+    display: flex;
+    justify-content: space-between;
+    border-radius: 20px;
+    align-items: center;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.8); 
+    backdrop-filter: blur(10px); 
+}
+
+
+header .logo {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+header .logo .img_box {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+header .logo .img_box img {
+    width: 100%;
+}
+
+header .logo a {
+    font-size: 30px;
+    color: rgb(24, 121, 5);
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+
+header ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-evenly;
+    width: 60%;
+}
+
+header ul li a {
+    font-size: larger;
+    color: rgb(4, 128, 4);
+    text-decoration: none;
+}
+
+header ul li a:hover {
+    color: #17da47;
+    border-bottom: 2px solid rgb(30, 197, 52);
+}
+
+
+.logout-button {
+    background-color: #53c25c;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 100px;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.logout-button:hover {
+    background-color: #077227;
+}
+
+.container {
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 100%;
+}
+
+
+.plant-item {
+    overflow: hidden;
+    margin-bottom: 10px;
+    background-color: rgba(255, 255, 255, 0.8); 
+    backdrop-filter: blur(10px); 
+    padding: 10px;
+    border-radius: 20px; 
+}
+
+.plant-item a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+}
+
+.plant-item h2 {
+    font-size: 1.5em;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.plant-item h2 img {
+    margin-right: 10px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%; 
+    object-fit: cover; 
+}
+
+.plant-item ul {
+    list-style-type: none; 
+    padding: 0;
+}
+
+.plant-item li {
+    margin-bottom: 10px; 
+}
+
+
+.plant-item p {
+    margin: 10px 0;
+}

@@ -1,0 +1,405 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ plant.name }}</title>
+    <link rel="stylesheet" href="{% static 'css/plant_detail.css' %}">
+    <style>
+        .read-more-content {
+            display: none;
+        }
+
+        .read-more-button {
+            cursor: pointer;
+            color: blue;
+            text-decoration: underline;
+            background: none;
+            border: none;
+            padding: 0;
+            font: inherit;
+        }
+
+        .read-more-button:focus {
+            outline: none;
+        }
+    </style>
+    <script>
+        function toggleReadMore(id) {
+            const content = document.getElementById(id);
+            const button = document.querySelector(`button[data-target="${id}"]`);
+            if (content.style.display === "none" || content.style.display === "") {
+                content.style.display = "inline";
+                button.textContent = "Read Less";
+            } else {
+                content.style.display = "none";
+                button.textContent = "Read More";
+            }
+        }
+    </script>
+</head>
+<body class="body">
+    <header>
+        <div class="logo">
+            <div class="img_box">
+                <img src="{% static 'images/imdg_3.jpg' %}" alt="Green World">
+            </div>
+            <a href="{% url 'index' %}"> Green World</a>
+        </div>
+        <ul>
+            <li><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="{% url 'favorites' %}">My Plants</a></li>
+            <li><a href="{% url 'process_question' %}">Plant Queries</a></li>
+            <li><a href="{% url 'register' %}">SignUP</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li>
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="logout-button">Logout</button>
+                </form>
+            </li>
+        </ul>
+    </header>
+
+    <div class="plant_info">
+        <img src="{{ plant.image.url }}" alt="Image of {{ plant.name }}">
+        <div class="plant_details">
+            <h1>{{ plant.name }}</h1>
+            {% if plant.scientific_name %}
+                <p>{{ plant.scientific_name }}</p>
+            {% endif %}
+            {% if plant.descriptions %}
+                <p>
+                    {{ plant.descriptions|slice:":200" }}
+                    <span class="read-more-content" id="plant-desc">{{ plant.descriptions|slice:"200:" }}</span>
+                </p>
+                <button class="read-more-button" data-target="plant-desc" onclick="toggleReadMore('plant-desc')">Read More</button>
+            {% endif %}
+            {% if plant.plant_origin %}
+                <h4>Origin:</h4>
+                <p>{{ plant.plant_origin }}</p>
+            {% endif %}
+        </div>
+    </div>
+    
+    <div class="plant_scientific">
+        <h2>Scientific Classification</h2>
+        {% if classification %}
+            <table>
+                {% if classification.phylum %}
+                    <tr><th>Phylum</th><td>{{ classification.phylum }}</td></tr>
+                {% endif %}
+                {% if classification.Class %}
+                    <tr><th>Class</th><td>{{ classification.Class }}</td></tr>
+                {% endif %}
+                {% if classification.order %}
+                    <tr><th>Order</th><td>{{ classification.order }}</td></tr>
+                {% endif %}
+                {% if classification.family %}
+                    <tr><th>Family</th><td>{{ classification.family }}</td></tr>
+                {% endif %}
+                {% if classification.genus %}
+                    <tr><th>Genus</th><td>{{ classification.genus }}</td></tr>
+                {% endif %}
+                {% if classification.species %}
+                    <tr><th>Species</th><td>{{ classification.species }}</td></tr>
+                {% endif %}
+            </table>
+        {% else %}
+            <p>No classification information available.</p>
+        {% endif %}
+    </div>
+
+    <div class="plant_care">
+        <h2>Care Guide</h2>
+        {% if care_guide %}
+            <div>
+                {% if care_guide.overview %}
+                    <p>
+                        {{ care_guide.overview|slice:":200" }}
+                        <span class="read-more-content" id="care-overview">{{ care_guide.overview|slice:"200:" }}</span>
+                    </p>
+                    <button class="read-more-button" data-target="care-overview" onclick="toggleReadMore('care-overview')">Read More</button>
+                {% endif %}
+                {% if care_guide.watering_care %}
+                    <h4>Watering Care:</h4>
+                    <p>
+                        {{ care_guide.watering_care|slice:":200" }}
+                        <span class="read-more-content" id="watering-care">{{ care_guide.watering_care|slice:"200:" }}</span>
+                    </p>
+                    <button class="read-more-button" data-target="watering-care" onclick="toggleReadMore('watering-care')">Read More</button>
+                {% endif %}
+                {% if care_guide.fertilizing_care %}
+                    <h4>Fertilizing Care: </h4>
+                    <p>
+                        {{ care_guide.fertilizing_care|slice:":200" }}
+                        <span class="read-more-content" id="fertilizing-care">{{ care_guide.fertilizing_care|slice:"200:" }}</span>
+                    </p>
+                    <button class="read-more-button" data-target="fertilizing-care" onclick="toggleReadMore('fertilizing-care')">Read More</button>
+                {% endif %}
+                {% if care_guide.pruning %}
+                    <h4>Pruning: </h4>
+                    <p>
+                        {{ care_guide.pruning|slice:":200" }}
+                        <span class="read-more-content" id="pruning">{{ care_guide.pruning|slice:"200:" }}</span>
+                    </p>
+                    <button class="read-more-button" data-target="pruning" onclick="toggleReadMore('pruning')">Read More</button>
+                {% endif %}
+                {% if care_guide.soil_care %}
+                    <h4>Soil Care: </h4>
+                    <p>
+                        {{ care_guide.soil_care|slice:":200" }}
+                        <span class="read-more-content" id="soil-care">{{ care_guide.soil_care|slice:"200:" }}</span>
+                    </p>
+                    <button class="read-more-button" data-target="soil-care" onclick="toggleReadMore('soil-care')">Read More</button>
+                {% endif %}
+                {% if care_guide.sun_light %}
+                    <h4>Sun Light: </h4>
+                    <p>
+                        {{ care_guide.sun_light|slice:":200" }}
+                        <span class="read-more-content" id="sun-light">{{ care_guide.sun_light|slice:"200:" }}</span>
+                    </p>
+                    <button class="read-more-button" data-target="sun-light" onclick="toggleReadMore('sun-light')">Read More</button>
+                {% endif %}
+                {% if care_guide.IdealTemperature %}
+                    <h4>Ideal Temperature: </h4>
+                    <p>
+                        {{ care_guide.IdealTemperature|slice:":200" }}
+                        <span class="read-more-content" id="ideal-temperature">{{ care_guide.IdealTemperature|slice:"200:" }}</span>
+                    </p>
+                    <button class="read-more-button" data-target="ideal-temperature" onclick="toggleReadMore('ideal-temperature')">Read More</button>
+                {% endif %}
+                {% if care_guide.Propagation %}
+                    <h4>Propagation: </h4>
+                    <p>
+                        {{ care_guide.Propagation|slice:":200" }}
+                        <span class="read-more-content" id="propagation">{{ care_guide.Propagation|slice:"200:" }}</span>
+                    </p>
+                    <button class="read-more-button" data-target="propagation" onclick="toggleReadMore('propagation')">Read More</button>
+                {% endif %}
+                {% if care_guide.TransplantingTime %}
+                    <h4>Transplanting Time: </h4>
+                    <p>
+                        {{ care_guide.TransplantingTime|slice:":200" }}
+                        <span class="read-more-content" id="transplanting-time">{{ care_guide.TransplantingTime|slice:"200:" }}</span>
+                    </p>
+                    <button class="read-more-button" data-target="transplanting-time" onclick="toggleReadMore('transplanting-time')">Read More</button>
+                {% endif %}
+                {% if care_guide.PlantingTime %}
+                    <h4>Planting Time: </h4>
+                    <p>
+                        {{ care_guide.PlantingTime|slice:":200" }}
+                        <span class="read-more-content" id="planting-time">{{ care_guide.PlantingTime|slice:"200:" }}</span>
+                    </p>
+                    <button class="read-more-button" data-target="planting-time" onclick="toggleReadMore('planting-time')">Read More</button>
+                {% endif %}
+                {% if care_guide.HarvestTime %}
+                    <h4>Harvest Time: </h4>
+                    <p>
+                        {{ care_guide.HarvestTime|slice:":200" }}
+                        <span class="read-more-content" id="harvest-time">{{ care_guide.HarvestTime|slice:"200:" }}</span>
+                    </p>
+                    <button class="read-more-button" data-target="harvest-time" onclick="toggleReadMore('harvest-time')">Read More</button>
+                {% endif %}
+            </div>
+        {% else %}
+            <p>No care guide available.</p>
+        {% endif %}
+    </div>
+
+    <div class="plant_attributes">
+        <h2>Attributes</h2>
+        {% if attributes %}
+            <table>
+                {% if attributes.Lifespan %}
+                    <tr>
+                        <th>Lifespan</th>
+                        <td>
+                            {{ attributes.Lifespan|slice:":200" }}
+                            <span class="read-more-content" id="lifespan">{{ attributes.Lifespan|slice:"200:" }}</span>
+                        </td>
+                        <td>
+                            <button class="read-more-button" data-target="lifespan" onclick="toggleReadMore('lifespan')">Read More</button>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if attributes.Plant_Type %}
+                    <tr>
+                        <th>Plant Type</th>
+                        <td>
+                            {{ attributes.Plant_Type|slice:":200" }}
+                            <span class="read-more-content" id="plant-type">{{ attributes.Plant_Type|slice:"200:" }}</span>
+                        </td>
+                        <td>
+                            <button class="read-more-button" data-target="plant-type" onclick="toggleReadMore('plant-type')">Read More</button>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if attributes.Planting_Time %}
+                    <tr>
+                        <th>Planting Time</th>
+                        <td>
+                            {{ attributes.Planting_Time|slice:":200" }}
+                            <span class="read-more-content" id="planting-time-attr">{{ attributes.Planting_Time|slice:"200:" }}</span>
+                        </td>
+                        <td>
+                            <button class="read-more-button" data-target="planting-time-attr" onclick="toggleReadMore('planting-time-attr')">Read More</button>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if attributes.Bloom_Time %}
+                    <tr>
+                        <th>Bloom Time</th>
+                        <td>
+                            {{ attributes.Bloom_Time|slice:":200" }}
+                            <span class="read-more-content" id="bloom-time">{{ attributes.Bloom_Time|slice:"200:" }}</span>
+                        </td>
+                        <td>
+                            <button class="read-more-button" data-target="bloom-time" onclick="toggleReadMore('bloom-time')">Read More</button>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if attributes.Harvest_Time %}
+                    <tr>
+                        <th>Harvest Time</th>
+                        <td>
+                            {{ attributes.Harvest_Time|slice:":200" }}
+                            <span class="read-more-content" id="harvest-time-attr">{{ attributes.Harvest_Time|slice:"200:" }}</span>
+                        </td>
+                        <td>
+                            <button class="read-more-button" data-target="harvest-time-attr" onclick="toggleReadMore('harvest-time-attr')">Read More</button>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if attributes.Plant_Height %}
+                    <tr>
+                        <th>Plant Height</th>
+                        <td>
+                            {{ attributes.Plant_Height|slice:":200" }}
+                            <span class="read-more-content" id="plant-height">{{ attributes.Plant_Height|slice:"200:" }}</span>
+                        </td>
+                        <td>
+                            <button class="read-more-button" data-target="plant-height" onclick="toggleReadMore('plant-height')">Read More</button>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if attributes.Spread %}
+                    <tr>
+                        <th>Spread</th>
+                        <td>
+                            {{ attributes.Spread|slice:":200" }}
+                            <span class="read-more-content" id="spread">{{ attributes.Spread|slice:"200:" }}</span>
+                        </td>
+                        <td>
+                            <button class="read-more-button" data-target="spread" onclick="toggleReadMore('spread')">Read More</button>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if attributes.Flower_Size %}
+                    <tr>
+                        <th>Flower Size</th>
+                        <td>
+                            {{ attributes.Flower_Size|slice:":200" }}
+                            <span class="read-more-content" id="flower-size">{{ attributes.Flower_Size|slice:"200:" }}</span>
+                        </td>
+                        <td>
+                            <button class="read-more-button" data-target="flower-size" onclick="toggleReadMore('flower-size')">Read More</button>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if attributes.Dormancy %}
+                    <tr>
+                        <th>Dormancy</th>
+                        <td>
+                            {{ attributes.Dormancy|slice:":200" }}
+                            <span class="read-more-content" id="dormancy">{{ attributes.Dormancy|slice:"200:" }}</span>
+                        </td>
+                        <td>
+                            <button class="read-more-button" data-target="dormancy" onclick="toggleReadMore('dormancy')">Read More</button>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if attributes.Leaf_type %}
+                    <tr>
+                        <th>Leaf Type</th>
+                        <td>
+                            {{ attributes.Leaf_type|slice:":200" }}
+                            <span class="read-more-content" id="leaf-type">{{ attributes.Leaf_type|slice:"200:" }}</span>
+                        </td>
+                        <td>
+                            <button class="read-more-button" data-target="leaf-type" onclick="toggleReadMore('leaf-type')">Read More</button>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if attributes.Ideal_Temperature %}
+                    <tr>
+                        <th>Ideal Temperature</th>
+                        <td>
+                            {{ attributes.Ideal_Temperature|slice:":200" }}
+                            <span class="read-more-content" id="ideal-temperature-attr">{{ attributes.Ideal_Temperature|slice:"200:" }}</span>
+                        </td>
+                        <td>
+                            <button class="read-more-button" data-target="ideal-temperature-attr" onclick="toggleReadMore('ideal-temperature-attr')">Read More</button>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if attributes.Pollinators %}
+                    <tr>
+                        <th>Pollinators</th>
+                        <td>
+                            {{ attributes.Pollinators|slice:":200" }}
+                            <span class="read-more-content" id="pollinators">{{ attributes.Pollinators|slice:"200:" }}</span>
+                        </td>
+                        <td>
+                            <button class="read-more-button" data-target="pollinators" onclick="toggleReadMore('pollinators')">Read More</button>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if attributes.Growth_Rate %}
+                    <tr>
+                        <th>Growth Rate</th>
+                        <td>
+                            {{ attributes.Growth_Rate|slice:":200" }}
+                            <span class="read-more-content" id="growth-rate">{{ attributes.Growth_Rate|slice:"200:" }}</span>
+                        </td>
+                        <td>
+                            <button class="read-more-button" data-target="growth-rate" onclick="toggleReadMore('growth-rate')">Read More</button>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if attributes.Water %}
+                    <tr>
+                        <th>Water</th>
+                        <td>
+                            {{ attributes.Water|slice:":200" }}
+                            <span class="read-more-content" id="water">{{ attributes.Water|slice:"200:" }}</span>
+                        </td>
+                        <td>
+                            <button class="read-more-button" data-target="water" onclick="toggleReadMore('water')">Read More</button>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if attributes.Sunlight %}
+                    <tr>
+                        <th>Sunlight</th>
+                        <td>
+                            {{ attributes.Sunlight|slice:":200" }}
+                            <span class="read-more-content" id="sunlight">{{ attributes.Sunlight|slice:"200:" }}</span>
+                        </td>
+                        <td>
+                            <button class="read-more-button" data-target="sunlight" onclick="toggleReadMore('sunlight')">Read More</button>
+                        </td>
+                    </tr>
+                {% endif %}
+            </table>
+        {% else %}
+            <p>No attributes information available.</p>
+        {% endif %}
+    </div>
+
+    <form action="{% url 'add_to_favorites' plant.id %}" method="post" class="save-form">
+        {% csrf_token %}
+        <button type="submit" class="save-button">Save</button>
+    </form>
+</body>
+</html>
